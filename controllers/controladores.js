@@ -1,9 +1,6 @@
-const { key, keyHours, token } = require("./.env");
 const axios = require('axios');
-const fs = require('fs/promises')
 const { format, add, parseISO } = require('date-fns')
-const { Telegraf } = require('telegraf');
-const bot = new Telegraf(token);
+const { key, keyHours } = require("../keys.js");
 
 const dadosMeteorologicos = async (latitude, longitude) => {
     const apiWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&lang=pt_br&appid=${key}`
@@ -26,9 +23,9 @@ const dadosMeteorologicos = async (latitude, longitude) => {
 const dadosMeteorologicosPorhora = async (latitude, longitude) => {
     const apiWeatherUrl = `http://api.weatherapi.com/v1/forecast.json?key=${keyHours}&q=${latitude},${longitude}&days=1&aqi=no&alerts=no&lang=pt`
     const { data: { forecast: { forecastday } } } = await axios.get(apiWeatherUrl);
-    const { hour, date, date_epoch } = forecastday[0]
+    const { hour } = forecastday[0]
     const { data: { location } } = await axios.get(apiWeatherUrl);
-    const horaAtual = location.localtime
+    const horaAtual = format(new Date(), 'yyyy-MM-dd HH:mm')
     const cidade = location.name
     const horaLimite = format(add(parseISO(horaAtual), { hours: 3 }), 'yyyy-MM-dd HH:mm')
     const Proximas3horas = hour.filter((hora) => {
@@ -39,6 +36,7 @@ const dadosMeteorologicosPorhora = async (latitude, longitude) => {
         cidade
     }
 }
+
 
 module.exports = {
     dadosMeteorologicos,
