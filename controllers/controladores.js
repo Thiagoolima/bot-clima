@@ -1,7 +1,7 @@
 const axios = require('axios');
 const { format, add, parseISO } = require('date-fns')
-const dotenv = require('dotenv').config().parsed;
-const { key, keyHours } = dotenv
+require('dotenv').config();
+const { key, keyHours } = process.env
 
 
 const dadosMeteorologicos = async (latitude, longitude) => {

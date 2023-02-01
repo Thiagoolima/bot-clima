@@ -1,6 +1,6 @@
 const { Telegraf } = require('telegraf');
-const dotenv = require('dotenv').config().parsed;
-const { token } = dotenv
+require('dotenv').config();
+const { token } = process.env
 const bot = new Telegraf(token);
 const { dadosMeteorologicos, dadosMeteorologicosPorhora } = require('./controllers/controladores')
 const { saudacao, horaAtual } = require('./controllers/funcoes-horarias')
