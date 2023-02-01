@@ -1,6 +1,8 @@
 const axios = require('axios');
 const { format, add, parseISO } = require('date-fns')
-const { key, keyHours } = require("../keys.js");
+const dotenv = require('dotenv').config().parsed;
+const { key, keyHours } = dotenv
+
 
 const dadosMeteorologicos = async (latitude, longitude) => {
     const apiWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&lang=pt_br&appid=${key}`
