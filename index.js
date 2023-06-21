@@ -48,16 +48,4 @@ bot.on('location', async (content) => {
     }
 })
 
-bot.startPolling()
-
-// const resposta = () => {
-//     bot.telegram.sendMessage(1204696911, "agora são exatamente" + " " + new Date())
-// }
-// bot.on('location', (content) => {
-//     setInterval(console.log(content.message.location),
-// })
-
-
-
-// const dados = require('https://api.telegram.org/bot5966822182:AAFEKaGs1DS6QgU9AfoUTZWX4YK5CGBM1Vw/getUpdates')
-// console.log(dados)
+bot.startPolling();
